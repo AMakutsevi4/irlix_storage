@@ -44,7 +44,7 @@ public class ProductService {
     }
 
     public void update(Product product) {
-        productRepo.save(product);
+        productRepo.update(product);
     }
 
     public void delete(Product product) {

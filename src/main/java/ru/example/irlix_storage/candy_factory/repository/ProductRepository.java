@@ -7,16 +7,12 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 import ru.example.irlix_storage.candy_factory.model.Product;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
 public class ProductRepository {
 
-    @PersistenceContext
-    private EntityManager entityManager;
     private final SessionFactory sf;
 
     public List<Product> findAll() {
