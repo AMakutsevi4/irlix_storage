@@ -40,7 +40,7 @@ public class ProductService {
     }
 
     public Product getById(Long id) {
-        return productRepo.findById(id).orElse(null);
+        return productRepo.findById(id);
     }
 
     public void update(Product product) {
