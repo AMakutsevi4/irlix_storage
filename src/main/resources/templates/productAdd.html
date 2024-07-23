@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить продукт</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/products">Продукты шоколадной фабрики</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link active" href="/products">Все продукты</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                    <a class="nav-item nav-link" th:href="@{/products/new}">Добавить продукт</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <h4>Оформление карточки нового продукта</h4>
+    <form th:action="@{/products}" th:object="${product}" method="post">
+        <div class="form-group">
+            <label for="name">Наименование:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('name')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="price">Цена:</label>
+            <input type="number" class="form-control" id="price" th:field="*{price}">
+            <div th:if="${#fields.hasErrors('price')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('price')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="calories">Калории:</label>
+            <input type="number" class="form-control" id="calories" th:field="*{calories}">
+            <div th:if="${#fields.hasErrors('calories')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('calories')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="supplie_id">Поставщик:</label>
+            <select class="form-control" id="supplie_id" th:field="*{supplie_Id}">
+                <option value="" disabled selected>Выберите поставщика</option>
+                <option th:each="supplie : ${supplies}" th:value="${supplie.id}" th:text="${supplie.company}"></option>
+            </select>
+            <div th:if="${#fields.hasErrors('supplie_Id')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('supplie_Id')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="structure">Состав:</label>
+            <input type="text" class="form-control" id="structure" th:field="*{structure}">
+            <div th:if="${#fields.hasErrors('structure')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('structure')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/product.gif}" alt="product gif" width="800">
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/marketing.png}" alt="supplier Image" width="800">
+</div>
+</body>
+</html>
