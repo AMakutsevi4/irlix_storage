@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.example.irlix_storage.candy_factory.model.Product;
 import ru.example.irlix_storage.candy_factory.model.Supplie;
+import ru.example.irlix_storage.candy_factory.model.Type;
 import ru.example.irlix_storage.candy_factory.repository.ProductRepository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +18,7 @@ public class ProductService {
 
     private final ProductRepository productRepo;
     private final SupplieService supplieService;
+    private final TypeService typeService;
 
     public List<Product> getAll() {
         return productRepo.findAll();
@@ -33,6 +36,14 @@ public class ProductService {
             supplierNames.put(product.getId(), supplie.getCompany());
         }
         return supplierNames;
+    }
+
+    public List<Type> getAllTypes(Product product) {
+        List<Type> selectedTypes = new ArrayList<>();
+        for (Type type : product.getTypes()) {
+            selectedTypes.add(typeService.getById(type.getId()));
+        }
+        return selectedTypes;
     }
 
     public void save(Product product) {

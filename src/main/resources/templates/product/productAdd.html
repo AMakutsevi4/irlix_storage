@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Обновить продукт</title>
+    <title>Добавить продукт</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -24,8 +24,8 @@
     </nav>
 </div>
 <div class="container">
-    <h4>Обновление карточки продукта</h4>
-    <form th:action="@{/products/edit/{id}(id=${product.id})}" th:object="${product}" method="post">
+    <h4>Оформление карточки нового продукта</h4>
+    <form th:action="@{/products}" th:object="${product}" method="post">
         <div class="form-group">
             <label for="name">Наименование:</label>
             <input type="text" class="form-control" id="name" th:field="*{name}">
@@ -48,8 +48,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="supplie_Id">Поставщик:</label>
-            <select class="form-control" id="supplie_Id" th:field="*{supplie_Id}">
+            <label for="supplie_id">Поставщик:</label>
+            <select class="form-control" id="supplie_id" th:field="*{supplie_Id}">
                 <option value="" disabled selected>Выберите поставщика</option>
                 <option th:each="supplie : ${supplies}" th:value="${supplie.id}" th:text="${supplie.company}"></option>
             </select>
@@ -64,8 +64,18 @@
                 <p th:each="err : ${#fields.errors('structure')}" th:text="${err}"></p>
             </div>
         </div>
+        <div class="form-group">
+            <label for="types">Тип:</label>
+                <select class="form-control" id="types" th:field="*{types}">
+                <option value="" disabled selected>Выберите тип</option>
+                <option th:each="type : ${allTypes}" th:value="${type.id}" th:text="${type.name}"></option>
+            </select>
+        </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/product.gif}" alt="product gif" width="800">
 </div>
 <div style="text-align: center">
     <img th:src="@{/images/marketing.png}" alt="supplier Image" width="800">
