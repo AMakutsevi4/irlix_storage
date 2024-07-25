@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Продукты</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/products">Продукты шоколадной фабрики</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link active" href="/products">Все продукты</a>
+                    <a class="nav-item nav-link active" href="/types">Все типы</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                    <a class="nav-item nav-link" th:href="@{/products/new}">Добавить продукт</a>
+                    <a class="nav-item nav-link" th:href="@{/types/new}">Добавить тип</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <h4>Все продукты</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Название</th>
+            <th>Цена</th>
+            <th>Калории</th>
+            <th>Поставщик</th>
+            <th>Состав</th>
+            <th>Тип</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.price}"></td>
+            <td th:text="${product.calories}"></td>
+            <td th:text="${supplierNames[product.id]}"></td>
+            <td th:text="${product.structure}"></td>
+            <td>
+                <span th:each="type : ${product.types}" th:text="${type.name} + ' '"></span>
+            </td>
+            <td>
+                <a th:href="@{'/products/edit/' + ${product.id}}" class="btn btn-warning">Изменить</a>
+                <a th:href="@{'/products/delete/' + ${product.id}}" class="btn btn-danger">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

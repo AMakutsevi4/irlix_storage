@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить поставщика</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/supplies/new">Поставщики компании</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/supplies">Главная</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies}">Список поставщиков</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<body>
+<div class="container">
+    <h4>Оформление карточки нового поставщика</h4>
+    <form action="#" th:action="@{/supplies}" th:object="${supplie}" method="post">
+        <div class="form-group">
+            <label for="company">Компания:</label>
+            <input type="text" class="form-control" id="company" th:field="*{company}">
+            <!-- Вывод ошибки для поля company -->
+            <div th:if="${#fields.hasErrors('company')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('company')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="address">Адрес:</label>
+            <input type="text" class="form-control" id="address" th:field="*{address}">
+            <!-- Вывод ошибки для поля address -->
+            <div th:if="${#fields.hasErrors('address')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('address')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/marketing.png}" alt="supplier Image" width="800">
+</div>
+<div style="text-align: center">
+<img th:src="@{/images/supplie.png}" alt="supplier Image" width="800">
+</div>
+</body>
+</html>

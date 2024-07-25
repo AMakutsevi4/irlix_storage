@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить владельца</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/owners/new">Владельцы компании</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <h4>Оформление карточки нового владельца</h4>
+    <form action="#" th:action="@{/owners}" th:object="${owner}" method="post">
+        <div class="form-group">
+            <label for="first_name">Имя:</label>
+            <input type="text" class="form-control" id="first_name" th:field="*{first_name}">
+            <!-- Вывод ошибки для поля first_name -->
+            <div th:if="${#fields.hasErrors('first_name')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('first_name')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="last_name">Фамилия:</label>
+            <input type="text" class="form-control" id="last_name" th:field="*{last_name}">
+            <!-- Вывод ошибки для поля last_name -->
+            <div th:if="${#fields.hasErrors('last_name')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('last_name')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="phone_number">Номер телефона:</label>
+            <input type="number" class="form-control" id="phone_number" th:field="*{phone_number}">
+            <!-- Вывод ошибки для поля phone_number -->
+            <div th:if="${#fields.hasErrors('phone_number')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('phone_number')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="text" class="form-control" id="email" th:field="*{email}">
+            <!-- Вывод ошибки для поля email -->
+            <div th:if="${#fields.hasErrors('email')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('email')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/marketing.png}" alt="supplier Image" width="800">
+</div>
+<div style="text-align: center">
+    <img th:src="@{/images/owner.jpg}" alt="owner Image" width="400">
+</div>
+</body>
+</html>
