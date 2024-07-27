@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Поставщики</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/supplies">Поставщики шоколадной фабрики</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link active" href="/products">Все продукты</a>
+                    <a class="nav-item nav-link active" href="/types">Все типы</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                    <a class="nav-item nav-link" th:href="@{/products/new}">Добавить продукт</a>
+                    <a class="nav-item nav-link" th:href="@{/types/new}">Добавить тип</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<body>
+<div class="container">
+    <h4>Все поставщики</h4>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Компания</th>
+            <th>Адрес</th>
+            <th>Владелец</th>
+            <th>Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="supplie : ${supplies}">
+            <td th:text="${supplie.id}"></td>
+            <td th:text="${supplie.company}"></td>
+            <td th:text="${supplie.address}"></td>
+            <td th:text="${supplie.owner.first_name + ' ' + supplie.owner.last_name}"></td>
+            <td>
+                <a th:href="@{'/supplies/edit/' + ${supplie.id}}" class="btn btn-warning">Изменить</a>
+                <a th:href="@{'/supplies/delete/' + ${supplie.id}}" class="btn btn-danger">Удалить</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

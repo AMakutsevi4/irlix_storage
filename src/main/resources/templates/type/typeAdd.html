@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить продукт</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container-fluid p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/types">Продукты шоколадной фабрики</a>
+            <div class="collapse navbar-collapse">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link active" href="/products">Все продукты</a>
+                    <a class="nav-item nav-link active" href="/types">Все типы</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
+                    <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
+                    <a class="nav-item nav-link" th:href="@{/products/new}">Добавить продукт</a>
+                    <a class="nav-item nav-link" th:href="@{/types/new}">Добавить тип</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container">
+    <h2>Оформление карточки нового типа</h2>
+    <form th:action="@{/types}" th:object="${type}" method="post">
+        <div class="form-group">
+            <label for="name">Название:</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}">
+            <div th:if="${#fields.hasErrors('name')}" class="text-danger">
+                <p th:each="err : ${#fields.errors('name')}" th:text="${err}"></p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <input type="text" class="form-control" id="description" th:field="*{description}">
+        </div>
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+    </form>
+</div>
+</body>
+</html>
