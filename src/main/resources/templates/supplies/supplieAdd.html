@@ -11,9 +11,14 @@
             <a class="navbar-brand" href="/supplies/new">Поставщики компании</a>
             <div class="collapse navbar-collapse">
                 <div class="navbar-nav">
-                    <a class="nav-item nav-link active" href="/supplies">Главная</a>
+                    <a class="nav-item nav-link active" href="/owners">Все владельцы</a>
+                    <a class="nav-item nav-link active" href="/supplies">Все поставщики</a>
+                    <a class="nav-item nav-link active" href="/products">Все продукты</a>
+                    <a class="nav-item nav-link active" href="/types">Все типы</a>
+                    <a class="nav-item nav-link" th:href="@{/owners/new}">Добавить владельца</a>
                     <a class="nav-item nav-link" th:href="@{/supplies/new}">Добавить поставщика</a>
-                    <a class="nav-item nav-link" th:href="@{/supplies}">Список поставщиков</a>
+                    <a class="nav-item nav-link" th:href="@{/products/new}">Добавить продукт</a>
+                    <a class="nav-item nav-link" th:href="@{/types/new}">Добавить тип</a>
                 </div>
             </div>
         </div>
@@ -23,6 +28,7 @@
 <div class="container">
     <h4>Оформление карточки нового поставщика</h4>
     <form action="#" th:action="@{/supplies}" th:object="${supplie}" method="post">
+        <input type="hidden" th:field="*{id}" />
         <div class="form-group">
             <label for="company">Компания:</label>
             <input type="text" class="form-control" id="company" th:field="*{company}">
@@ -38,6 +44,13 @@
             <div th:if="${#fields.hasErrors('address')}" class="text-danger">
                 <p th:each="err : ${#fields.errors('address')}" th:text="${err}"></p>
             </div>
+        </div>
+        <div class="form-group">
+            <label for="owners">Владелец:</label>
+            <select class="form-control" id="owners" th:field="*{owner.id}">
+                <option value="" disabled selected>Выберите владельца</option>
+                <option th:each="owner : ${owners}" th:value="${owner.id}" th:text="${owner.first_name + ' ' + owner.last_name}"></option>
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Сохранить</button>
     </form>

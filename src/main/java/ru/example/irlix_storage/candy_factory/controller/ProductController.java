@@ -2,6 +2,8 @@ package ru.example.irlix_storage.candy_factory.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +18,8 @@ import ru.example.irlix_storage.candy_factory.service.TypeService;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class ProductController {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
     private final TypeService typeService;
@@ -41,9 +45,12 @@ public class ProductController {
         if (result.hasErrors()) {
             model.addAttribute("supplies", productService.getAllSupplies());
             model.addAttribute("allTypes", typeService.getAll());
+            logger.debug("Обнаружены ошибки проверки: {}", result.getAllErrors());
             return "product/productAdd";
         }
+        logger.debug("Сохранение продукта: {}", product);
         productService.save(product);
+        logger.debug("Продукт успешно сохранен");
         return "redirect:/products";
     }
 

@@ -24,7 +24,7 @@ public class Type {
     private String name;
     private String description;
 
-    @ManyToMany(mappedBy = "types")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "types")
     /*загружаем коллекцию перед использованием,
     избегаем ошибку LazyInitializationException*/
     @ToString.Exclude

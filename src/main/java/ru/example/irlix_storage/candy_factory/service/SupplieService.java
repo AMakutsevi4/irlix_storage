@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import ru.example.irlix_storage.candy_factory.model.Supplie;
 import ru.example.irlix_storage.candy_factory.repository.SupplieRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -14,19 +13,23 @@ public class SupplieService {
 
     private final SupplieRepository supplieRepo;
 
-    public List<Supplie> getAll() {
-        return supplieRepo.getAllSupplies();
+    public Object getAll() {
+        return supplieRepo.findAll();
     }
 
     public void save(Supplie supplie) {
-        supplieRepo.saveSupplie(supplie);
+        if (supplie.getId() != null) {
+            supplieRepo.save(supplie);
+        } else {
+            supplieRepo.save(supplie);
+        }
     }
 
     public Optional<Supplie> getById(Long id) {
-        return supplieRepo.getBySupplieId(id);
+        return supplieRepo.findById(id);
     }
 
-    public void delete(Long id) {
-        supplieRepo.deleteSupplie(id);
+    public void delete(Supplie supplie) {
+        supplieRepo.delete(supplie);
     }
 }
